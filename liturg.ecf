@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<system xmlns="http://www.eiffel.com/developers/xml/configuration-1-14-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-14-0 http://www.eiffel.com/developers/xml/configuration-1-14-0.xsd" name="liturg" uuid="90914184-891E-4BD3-9965-E083FF9BCD5D">
+	<target name="liturg">
+		<root class="APPLICATION" feature="make"/>
+		<option warning="true">
+			<assertions precondition="true" postcondition="true" check="true" invariant="true" loop="true" supplier_precondition="true"/>
+		</option>
+		<setting name="console_application" value="true"/>
+		<precompile name="base_pre" location="$ISE_PRECOMP\base-safe.ecf"/>
+		<library name="base" location="$ISE_LIBRARY\library\base\base-safe.ecf"/>
+		<library name="curl" location="$ISE_LIBRARY\library\cURL\cURL-safe.ecf"/>
+		<library name="json" location="$ISE_LIBRARY\contrib\library\text\parser\json\library\json-safe.ecf"/>
+		<cluster name="liturg" location=".\" recursive="true">
+			<file_rule>
+				<exclude>/EIFGENs$</exclude>
+				<exclude>/CVS$</exclude>
+				<exclude>/.svn$</exclude>
+			</file_rule>
+		</cluster>
+	</target>
+</system>
