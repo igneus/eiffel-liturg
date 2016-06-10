@@ -20,6 +20,7 @@ feature {NONE} -- Initialization
 			l_result: INTEGER
 			l_curl_string: CURL_STRING
 			json_parser: JSON_PARSER
+			headers: POINTER
 		do
 			if curl.is_dynamic_library_exists then
 				create l_curl_string.make_empty
@@ -33,9 +34,12 @@ feature {NONE} -- Initialization
 				-- pass our `l_curl_string''s object id to the callback function
 				curl_easy.setopt_integer (curl_handle, {CURL_OPT_CONSTANTS}.curlopt_writedata, l_curl_string.object_id)
 
-				-- curl_easy.setopt_integer (curl_handle, {CURL_OPT_CONSTANTS}.curlopt_verbose, 1)
+				curl_easy.setopt_integer (curl_handle, {CURL_OPT_CONSTANTS}.curlopt_verbose, 1)
 
-				-- todo: set custom User-Agent
+				-- headers
+				headers := curl.slist_append (headers, "Accept: application/json")
+				headers := curl.slist_append (headers, "User-Agent: liturg (Eiffel libcurl; https://github.com/igneus/eiffel-liturg)")
+				curl_easy.setopt_slist (curl_handle, {CURL_OPT_CONSTANTS}.curlopt_httpheader, headers)
 
 				l_result := curl_easy.perform (curl_handle)
 				curl_easy.cleanup (curl_handle)
